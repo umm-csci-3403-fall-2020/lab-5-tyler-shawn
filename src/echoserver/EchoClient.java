@@ -13,6 +13,7 @@ public class EchoClient {
     }
     else {
       server = args[0];
+
     }
 
   
@@ -23,18 +24,18 @@ public class EchoClient {
     
       // Get the input stream so we can read from the socket
       InputStream input = socket.getInputStream();
-      BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-      
+      OutputStream output = socket.getOutputStream();
+
       // Print all the input we receive from the server
-      byte line;
-      while (( line = reader.readLine()) != null) {
-	int num  = read(line);
-        char charactor = (char)num;
-	// write();
-	// flush();
-	System.out.println(num);
-	System.out.println(charactor);
-	System.out.println(line);
+      int line;
+      while ((line = System.in.read()) != -1) {
+        //Casting the output to a byte
+        output.write((byte) line);
+        System.out.write(line);
+
+        //Flushing output and System.out because they are both outputs
+        output.flush();
+        System.out.flush();
       } 
       
       //Close the socket when we are done reading from it

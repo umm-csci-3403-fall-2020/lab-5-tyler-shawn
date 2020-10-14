@@ -18,18 +18,18 @@ public class EchoServer {
                 Socket client = sock.accept();
                 System.out.println("Got a request!");
 
+                //Creating input and output streams so we are able to send and recieve stuff in the socket
                 InputStream input = client.getInputStream();
                 OutputStream output = client.getOutputStream();
 
-                // Construct a writer so we can write to the socket, thereby
-                // sending something back to the client.
 
-
-                // Send the current date back to the client.
+                //Creating new array of bytes
                 byte[] bytes = new byte[16*1024];
 
                 int line;
+                //Reading from the input stream
                 while ((line = input.read(bytes)) > 0) {
+                    //Outputting back to the socket to return to the clien
                     output.write(bytes, 0, line);
                 }
                 // Close the client socket since we're done.
